@@ -59,7 +59,16 @@ function allowedRedirect(raw) {
 }
 
 function returnUrl() {
-  return allowedRedirect(new URLSearchParams(window.location.search).get("redirect"));
+  const raw = new URLSearchParams(window.location.search).get("redirect");
+  if (raw) return allowedRedirect(raw);
+  const referrer = allowedRedirect(document.referrer);
+  if (!referrer || referrer.origin === window.location.origin) return null;
+  return referrer;
+}
+
+function rejectedRedirect() {
+  const raw = new URLSearchParams(window.location.search).get("redirect");
+  return Boolean(raw) && !allowedRedirect(raw);
 }
 
 function showInvalid() {
@@ -84,8 +93,8 @@ function handoffToken(user) {
 async function sendToken(user) {
   const target = returnUrl();
   if (!target) {
-    showInvalid();
     handoff = null;
+    showForm();
     return;
   }
   loginView.hidden = true;
@@ -120,7 +129,7 @@ form.addEventListener("submit", async (event) => {
     notify("error", "请输入密码");
     return;
   }
-  if (!returnUrl()) {
+  if (rejectedRedirect()) {
     showInvalid();
     return;
   }
@@ -148,11 +157,11 @@ form.addEventListener("submit", async (event) => {
 });
 
 onAuthStateChanged(auth, (user) => {
-  if (!returnUrl()) {
+  if (rejectedRedirect()) {
     showInvalid();
     return;
   }
-  if (user) {
+  if (user && returnUrl()) {
     void handoffToken(user);
     return;
   }
