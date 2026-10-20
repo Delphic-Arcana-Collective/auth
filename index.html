@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Delphic</title>
+  </head>
+  <body>
+    <div class="page">
+      <div class="hero">
+        <img src="/login.jpg" alt="Login background" />
+      </div>
+      <div class="panel">
+        <div class="panel-main" id="login" hidden>
+          <div class="brand">
+            <h1>德尔菲秘仪社</h1>
+            <p>Delphic Arcana Collection</p>
+          </div>
+          <div class="card">
+            <form id="form" novalidate>
+              <div class="field">
+                <label for="email">邮箱 <span class="req">*</span></label>
+                <input id="email" type="email" placeholder="your@email.com" autocomplete="username" />
+              </div>
+              <div class="field">
+                <label for="password">密码</label>
+                <div class="password">
+                  <input id="password" type="password" placeholder="请在此输入密码" autocomplete="current-password" />
+                  <button id="toggle-password" type="button">显示</button>
+                </div>
+              </div>
+              <button id="submit" type="submit">登录</button>
+            </form>
+          </div>
+          <p class="hint">请使用已登记的邮箱和密码登录</p>
+        </div>
+        <div class="panel-main" id="invalid" hidden>
+          <p class="invalid">This return address is not allowed.</p>
+        </div>
+        <p class="legal">© <span id="year"></span> Delphic. All rights reserved.</p>
+      </div>
+    </div>
+    <div id="toasts"></div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
