@@ -16,6 +16,7 @@ const auth = getAuth(app);
 
 const loginView = document.querySelector("#login");
 const invalidView = document.querySelector("#invalid");
+const loadingView = document.querySelector("#loading");
 const form = document.querySelector("#form");
 const emailInput = document.querySelector("#email");
 const passwordInput = document.querySelector("#password");
@@ -71,12 +72,20 @@ function rejectedRedirect() {
   return Boolean(raw) && !allowedRedirect(raw);
 }
 
+function showLoading() {
+  loadingView.hidden = false;
+  loginView.hidden = true;
+  invalidView.hidden = true;
+}
+
 function showInvalid() {
+  loadingView.hidden = true;
   loginView.hidden = true;
   invalidView.hidden = false;
 }
 
 function showForm() {
+  loadingView.hidden = true;
   invalidView.hidden = true;
   loginView.hidden = false;
 }
@@ -97,7 +106,7 @@ async function sendToken(user) {
     showForm();
     return;
   }
-  loginView.hidden = true;
+  showLoading();
   try {
     const idToken = await user.getIdToken(true);
     setTokenCookie(idToken);
@@ -135,13 +144,14 @@ form.addEventListener("submit", async (event) => {
   }
   submitting = true;
   submitButton.disabled = true;
-  submitButton.textContent = "登录中...";
+  showLoading();
   try {
     const credential = await signInWithEmailAndPassword(auth, email, password);
     notify("success", "登录成功");
     await handoffToken(credential.user);
   } catch (err) {
     const code = typeof err === "object" && err && "code" in err ? String(err.code) : "";
+    showForm();
     if (code === "auth/invalid-credential" || code === "auth/wrong-password" || code === "auth/user-not-found") {
       notify("error", "邮箱或密码错误");
     } else {

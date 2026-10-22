@@ -1,8 +1,8 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
-  --color-accent: #4f46e5;
-  --color-accent-text: #ffffff;
+  --color-accent: #e2b8bf;
+  --color-accent-text: #1a1a1a;
   --color-control-light: #9ca3af;
   --color-control: #4b5563;
   --color-main: #111827;
@@ -211,6 +211,61 @@ input {
 .invalid {
   margin: 0;
   text-align: center;
+}
+
+.pixel-load {
+  position: fixed;
+  inset: 0;
+  z-index: 30;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2.5rem;
+  background: #000000;
+}
+
+.pixel-load[hidden] {
+  display: none;
+}
+
+.pixels {
+  display: flex;
+  gap: 10px;
+}
+
+.pixels span {
+  width: 14px;
+  height: 14px;
+  background: #e2b8bf;
+  animation: pixel-hop 0.9s steps(2, end) infinite;
+}
+
+.pixels span:nth-child(2) {
+  animation-delay: 0.15s;
+  background: #f3d5d9;
+}
+
+.pixels span:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+.pixels span:nth-child(4) {
+  animation-delay: 0.45s;
+  background: #f3d5d9;
+}
+
+@keyframes pixel-hop {
+  50% {
+    transform: translateY(-16px);
+  }
+}
+
+.pixel-load p {
+  margin: 0;
+  color: #e2b8bf;
+  font-size: 0.875rem;
+  letter-spacing: 0.12em;
 }
 
 #toasts {
