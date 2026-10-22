@@ -1,7 +1,7 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
-  --color-accent: #f3b6c0;
+  --color-accent: #f6adc6;
   --color-accent-text: #1a1a1a;
   --color-control-light: #9ca3af;
   --color-control: #4b5563;
@@ -237,13 +237,13 @@ input {
 .pixels span {
   width: 14px;
   height: 14px;
-  background: #f3b6c0;
+  background: #f6adc6;
   animation: pixel-hop 0.9s steps(2, end) infinite;
 }
 
 .pixels span:nth-child(2) {
   animation-delay: 0.15s;
-  background: #f8d3d9;
+  background: #f9cade;
 }
 
 .pixels span:nth-child(3) {
@@ -252,7 +252,7 @@ input {
 
 .pixels span:nth-child(4) {
   animation-delay: 0.45s;
-  background: #f8d3d9;
+  background: #f9cade;
 }
 
 @keyframes pixel-hop {
@@ -263,7 +263,7 @@ input {
 
 .pixel-load p {
   margin: 0;
-  color: #f3b6c0;
+  color: #f6adc6;
   font-size: 0.875rem;
   letter-spacing: 0.12em;
 }

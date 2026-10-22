@@ -17,6 +17,16 @@ After a successful sign-in, or when a session is already present, the site refre
 
 Apps store that fragment value in `sessionStorage` under `delphic_token`, then remove the fragment. They may also read the cookie of the same name.
 
+## Accent
+
+The accent is `#F6ADC6` (抚子粉, Nadeshiko). The runner-up is `#FFB7C5` (樱花, cherry blossom).
+
+The other candidates are in [`docs/accent-compare.html`](docs/accent-compare.html):
+
+- `#F3B6C0`, the previous accent
+- `#EFBBCC`, Cameo Pink (ISCC-NBS)
+- `#F091A9`, Mauvelous (Crayola)
+
 ## Local
 
 ```bash
